@@ -1,5 +1,6 @@
 package com.fulfillment.fulfillmentmanager.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -7,5 +8,7 @@ import jakarta.persistence.Id;
 public class Name {
     @Id
     private Integer id;
-    private String person_name;
+
+    @Column(name = "person_name", nullable = false)
+    private String personName;
 }

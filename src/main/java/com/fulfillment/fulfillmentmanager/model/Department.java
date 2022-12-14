@@ -1,13 +1,16 @@
 package com.fulfillment.fulfillmentmanager.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "departments")
 public class Department {
     @Id
     private Integer id;
-    private String name;
+    private String deptName;
 
     public Integer getId() {
         return id;
@@ -17,19 +20,19 @@ public class Department {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     @Override
     public String toString() {
         return "Department{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + deptName + '\'' +
                 '}';
     }
 }
