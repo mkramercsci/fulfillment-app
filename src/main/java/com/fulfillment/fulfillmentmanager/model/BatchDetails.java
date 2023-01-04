@@ -6,9 +6,9 @@ import jakarta.persistence.Id;
 @Entity
 public class BatchDetails {
     @Id
-    public Integer dept_id;
-    public Integer item_id;
-    public Integer order_id;
-    public Integer batch_id;
+    public Integer deptId;
+    public Integer itemId;
+    public Integer orderId;
+    public Integer batchId;
     public Integer quantity;
 }
