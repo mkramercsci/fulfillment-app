@@ -6,5 +6,5 @@ import jakarta.persistence.Id;
 @Entity
 public class Batch {
     @Id
-    private Integer id;
+    public Integer id;
 }

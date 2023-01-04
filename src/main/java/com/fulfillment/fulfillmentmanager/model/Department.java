@@ -10,6 +10,8 @@ import jakarta.persistence.Table;
 public class Department {
     @Id
     private Integer id;
+
+    @Column(name = "dept_name", nullable = false)
     private String deptName;
 
     public Integer getId() {

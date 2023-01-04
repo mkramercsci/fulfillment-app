@@ -7,8 +7,8 @@ import jakarta.persistence.Id;
 @Entity
 public class Name {
     @Id
-    private Integer id;
+    public Integer id;
 
     @Column(name = "person_name", nullable = false)
-    private String personName;
+    public String personName;
 }
