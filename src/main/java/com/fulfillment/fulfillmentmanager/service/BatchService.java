@@ -9,7 +9,9 @@ import java.util.Random;
 
 @Service
 public class BatchService {
+
     private final BatchRepository batchRepository;
+
     Random random = new Random();
 
     public BatchService(BatchRepository batchRepository) {
@@ -24,6 +26,7 @@ public class BatchService {
 
         // batch ids should always be 3 digits
         batch.setId(random.nextInt(999));
+
         return batchRepository.save(batch);
     }
 

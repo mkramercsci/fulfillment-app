@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.0
--- Dumped by pg_dump version 15.0
+-- Dumped from database version 14.5
+-- Dumped by pg_dump version 14.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: batch_details; Type: TABLE; Schema: public; Owner: mkramer
+-- Name: batch_details; Type: TABLE; Schema: public; Owner: fulfillmentuser
 --
 
 CREATE TABLE public.batch_details (
@@ -33,10 +33,10 @@ CREATE TABLE public.batch_details (
 );
 
 
-ALTER TABLE public.batch_details OWNER TO mkramer;
+ALTER TABLE public.batch_details OWNER TO fulfillmentuser;
 
 --
--- Name: batches; Type: TABLE; Schema: public; Owner: mkramer
+-- Name: batches; Type: TABLE; Schema: public; Owner: fulfillmentuser
 --
 
 CREATE TABLE public.batches (
@@ -44,10 +44,10 @@ CREATE TABLE public.batches (
 );
 
 
-ALTER TABLE public.batches OWNER TO mkramer;
+ALTER TABLE public.batches OWNER TO fulfillmentuser;
 
 --
--- Name: departments; Type: TABLE; Schema: public; Owner: mkramer
+-- Name: departments; Type: TABLE; Schema: public; Owner: fulfillmentuser
 --
 
 CREATE TABLE public.departments (
@@ -56,10 +56,10 @@ CREATE TABLE public.departments (
 );
 
 
-ALTER TABLE public.departments OWNER TO mkramer;
+ALTER TABLE public.departments OWNER TO fulfillmentuser;
 
 --
--- Name: items; Type: TABLE; Schema: public; Owner: mkramer
+-- Name: items; Type: TABLE; Schema: public; Owner: fulfillmentuser
 --
 
 CREATE TABLE public.items (
@@ -69,34 +69,34 @@ CREATE TABLE public.items (
 );
 
 
-ALTER TABLE public.items OWNER TO mkramer;
+ALTER TABLE public.items OWNER TO fulfillmentuser;
 
 --
--- Name: names; Type: TABLE; Schema: public; Owner: mkramer
+-- Name: names; Type: TABLE; Schema: public; Owner: fulfillmentuser
 --
 
 CREATE TABLE public.names (
     person_name character varying(30) NOT NULL,
-    id integer
+    id integer NOT NULL
 );
 
 
-ALTER TABLE public.names OWNER TO mkramer;
+ALTER TABLE public.names OWNER TO fulfillmentuser;
 
 --
--- Name: orders; Type: TABLE; Schema: public; Owner: mkramer
+-- Name: orders; Type: TABLE; Schema: public; Owner: fulfillmentuser
 --
 
 CREATE TABLE public.orders (
     id integer NOT NULL,
-    customer_name character varying(30)
+    name_id integer
 );
 
 
-ALTER TABLE public.orders OWNER TO mkramer;
+ALTER TABLE public.orders OWNER TO fulfillmentuser;
 
 --
--- Data for Name: batch_details; Type: TABLE DATA; Schema: public; Owner: mkramer
+-- Data for Name: batch_details; Type: TABLE DATA; Schema: public; Owner: fulfillmentuser
 --
 
 COPY public.batch_details (order_id, item_id, dept_id, quantity, batch_id) FROM stdin;
@@ -104,27 +104,17 @@ COPY public.batch_details (order_id, item_id, dept_id, quantity, batch_id) FROM 
 
 
 --
--- Data for Name: batches; Type: TABLE DATA; Schema: public; Owner: mkramer
+-- Data for Name: batches; Type: TABLE DATA; Schema: public; Owner: fulfillmentuser
 --
 
 COPY public.batches (id) FROM stdin;
-111
-184
-348
-347
-449
-979
-160
-166
-553
-398
-905
-721
+420
+727
 \.
 
 
 --
--- Data for Name: departments; Type: TABLE DATA; Schema: public; Owner: mkramer
+-- Data for Name: departments; Type: TABLE DATA; Schema: public; Owner: fulfillmentuser
 --
 
 COPY public.departments (id, dept_name) FROM stdin;
@@ -140,7 +130,7 @@ COPY public.departments (id, dept_name) FROM stdin;
 
 
 --
--- Data for Name: items; Type: TABLE DATA; Schema: public; Owner: mkramer
+-- Data for Name: items; Type: TABLE DATA; Schema: public; Owner: fulfillmentuser
 --
 
 COPY public.items (id, dept_id, item_name) FROM stdin;
@@ -276,7 +266,7 @@ COPY public.items (id, dept_id, item_name) FROM stdin;
 
 
 --
--- Data for Name: names; Type: TABLE DATA; Schema: public; Owner: mkramer
+-- Data for Name: names; Type: TABLE DATA; Schema: public; Owner: fulfillmentuser
 --
 
 COPY public.names (person_name, id) FROM stdin;
@@ -7066,20 +7056,16 @@ Elianna	6782
 
 
 --
--- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: mkramer
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: fulfillmentuser
 --
 
-COPY public.orders (id, customer_name) FROM stdin;
-9051669	Derald
-66170340	Crockett
-77630848	Rolland
-61033663	Jamie
-45911047	Mackenzie
+COPY public.orders (id, name_id) FROM stdin;
+45197665	1
 \.
 
 
 --
--- Name: batch_details batch_details_pkey; Type: CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: batch_details batch_details_pkey; Type: CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.batch_details
@@ -7087,7 +7073,7 @@ ALTER TABLE ONLY public.batch_details
 
 
 --
--- Name: batches batches_pkey; Type: CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: batches batches_pkey; Type: CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.batches
@@ -7095,7 +7081,7 @@ ALTER TABLE ONLY public.batches
 
 
 --
--- Name: departments department_pkey; Type: CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: departments department_pkey; Type: CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.departments
@@ -7103,7 +7089,7 @@ ALTER TABLE ONLY public.departments
 
 
 --
--- Name: items items_item_id_dept_id_key; Type: CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: items items_item_id_dept_id_key; Type: CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.items
@@ -7111,7 +7097,7 @@ ALTER TABLE ONLY public.items
 
 
 --
--- Name: items items_pkey; Type: CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: items items_pkey; Type: CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.items
@@ -7119,15 +7105,15 @@ ALTER TABLE ONLY public.items
 
 
 --
--- Name: names name_pkey; Type: CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: names names_pkey; Type: CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.names
-    ADD CONSTRAINT name_pkey PRIMARY KEY (person_name);
+    ADD CONSTRAINT names_pkey PRIMARY KEY (id);
 
 
 --
--- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.orders
@@ -7135,7 +7121,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- Name: batch_details batch_details_batch_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: batch_details batch_details_batch_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.batch_details
@@ -7143,7 +7129,7 @@ ALTER TABLE ONLY public.batch_details
 
 
 --
--- Name: batch_details fk_order_details_items; Type: FK CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: batch_details fk_order_details_items; Type: FK CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.batch_details
@@ -7151,7 +7137,7 @@ ALTER TABLE ONLY public.batch_details
 
 
 --
--- Name: items item_dept_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: items item_dept_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.items
@@ -7159,7 +7145,7 @@ ALTER TABLE ONLY public.items
 
 
 --
--- Name: batch_details order_details_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: batch_details order_details_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.batch_details
@@ -7167,53 +7153,11 @@ ALTER TABLE ONLY public.batch_details
 
 
 --
--- Name: orders orders_customer_name_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mkramer
+-- Name: orders orders_name_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fulfillmentuser
 --
 
 ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT orders_customer_name_fkey FOREIGN KEY (customer_name) REFERENCES public.names(person_name);
-
-
---
--- Name: TABLE batch_details; Type: ACL; Schema: public; Owner: mkramer
---
-
-GRANT ALL ON TABLE public.batch_details TO fulfillmentuser;
-
-
---
--- Name: TABLE batches; Type: ACL; Schema: public; Owner: mkramer
---
-
-GRANT ALL ON TABLE public.batches TO fulfillmentuser;
-
-
---
--- Name: TABLE departments; Type: ACL; Schema: public; Owner: mkramer
---
-
-GRANT ALL ON TABLE public.departments TO fulfillmentuser;
-
-
---
--- Name: TABLE items; Type: ACL; Schema: public; Owner: mkramer
---
-
-GRANT ALL ON TABLE public.items TO fulfillmentuser;
-
-
---
--- Name: TABLE names; Type: ACL; Schema: public; Owner: mkramer
---
-
-GRANT ALL ON TABLE public.names TO fulfillmentuser;
-
-
---
--- Name: TABLE orders; Type: ACL; Schema: public; Owner: mkramer
---
-
-GRANT ALL ON TABLE public.orders TO fulfillmentuser;
+    ADD CONSTRAINT orders_name_id_fkey FOREIGN KEY (name_id) REFERENCES public.names(id);
 
 
 --

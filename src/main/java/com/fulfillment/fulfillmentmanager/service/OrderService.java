@@ -27,18 +27,25 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    // add a new order with randomly generated name and id
     public Order addOrder (Order order) {
 
-        // order Id should always be 8 digits
+        // order Id should always be 8 digits 1000000-99999999
         order.setId(random.nextInt(99999999));
 
-        // select a random customer name from the database
-        // this application is from the fulfillment employee's perspective,
-        // so customer names come from outside the store and are not input from the employee
-        List<Name> names = nameRepository.findAll();
-        order.setCustomerName(names.get(random.nextInt(names.size() - 1)).personName);
+        //List<Name> names = nameRepository.findAll();
+
+        //Name randomName = names.get(random.nextInt(names.size() - 1));
+
+        order.setCustomerName(nameRepository.findAll().get(0));
 
         return orderRepository.save(order);
+    }
+
+    public String testing() {
+        Name name = nameRepository.findAll().get(0);
+        String s = name.getPersonName();
+        return s;
     }
 
 }

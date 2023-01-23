@@ -32,5 +32,12 @@ public class ItemService {
         Integer max = findAll().size();
 
         return findAll().get(random.nextInt(max));
+
     }
+
+    public String testing () {
+
+        return Integer.toString(findAll().size());
+    }
+
 }

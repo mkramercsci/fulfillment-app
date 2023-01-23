@@ -18,14 +18,22 @@ public class OrderController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Order>> findAll () {
-        List<Order> orders = orderService.findAll();
 
+        List<Order> orders = orderService.findAll();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
     @PostMapping("/add")
     public ResponseEntity<Order> addOrder(@RequestBody Order order) {
+
         Order newOrder = orderService.addOrder(order);
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
+    }
+
+    // dummy method for checking attributes
+    @GetMapping("/testing")
+    public String testing (){
+
+        return orderService.testing();
     }
 }

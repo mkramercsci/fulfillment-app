@@ -1,7 +1,10 @@
 package com.fulfillment.fulfillmentmanager;
 
 import com.fulfillment.fulfillmentmanager.model.Department;
+import com.fulfillment.fulfillmentmanager.model.Item;
 import com.fulfillment.fulfillmentmanager.repo.DepartmentRepository;
+import com.fulfillment.fulfillmentmanager.repo.ItemRepository;
+import com.fulfillment.fulfillmentmanager.service.ItemService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

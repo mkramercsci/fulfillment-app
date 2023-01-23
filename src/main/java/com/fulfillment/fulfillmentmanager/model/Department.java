@@ -37,6 +37,6 @@ public class Department {
                 '}';
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    @OneToMany(mappedBy = "department")
     private List<Item> items;
 }

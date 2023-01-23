@@ -1,9 +1,7 @@
 package com.fulfillment.fulfillmentmanager.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "orders")
@@ -11,8 +9,9 @@ public class Order {
     @Id
     public Integer id;
 
-    @Column(name = "customer_name", nullable = false)
-    public String customerName;
+    @ManyToOne
+    @JoinColumn(name = "name_id")
+    private Name name;
 
     public Integer getId() {
         return id;
@@ -22,11 +21,11 @@ public class Order {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public Name getCustomerName() {
+        return name;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerName(Name customerName) {
+        this.name = customerName;
     }
 }
