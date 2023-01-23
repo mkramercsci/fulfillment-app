@@ -22,14 +22,14 @@ public class ItemController {
     }
 
     @GetMapping("/all")
-    public List<Item> findAllItems () {
-        return itemService.findAllItems();
+    public List<Item> getAllItems () {
+        return itemService.findAll();
     }
 
-    @GetMapping("/{deptId}")
-    public List<Item> getItemsByDeptId (@PathVariable ("deptId") Integer id) {
-        return itemService.getByDeptId(id);
-    }
+    //@GetMapping("/{deptId}")
+    //public List<Item> findByDeptId (@PathVariable ("deptId") Integer id) {
+        //return itemService.findByDeptId(id);
+    //}
 
     @GetMapping("/random")
     public Item getRandomItem () {

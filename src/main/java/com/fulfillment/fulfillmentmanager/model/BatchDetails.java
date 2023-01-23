@@ -21,6 +21,6 @@ public class BatchDetails {
     @Column(name = "batch_id", nullable = false)
     public Integer batchId;
 
-    @Column(name = "", nullable = false)
+    @Column(nullable = false)
     public Integer quantity;
 }

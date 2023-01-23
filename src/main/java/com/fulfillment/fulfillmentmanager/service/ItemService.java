@@ -1,13 +1,10 @@
 package com.fulfillment.fulfillmentmanager.service;
 
-
-import com.fulfillment.fulfillmentmanager.exception.GenericNotFoundException;
 import com.fulfillment.fulfillmentmanager.model.Item;
 import com.fulfillment.fulfillmentmanager.repo.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -20,11 +17,11 @@ public class ItemService {
         this.itemRepository = itemRepo;
     }
 
-    public List<Item> getByDeptId(Integer id) {
-        return itemRepository.findByDeptId(id);
-    }
+    //public List<Item> findByDeptId(Integer id) {
+        //return itemRepository.findByDeptId(id);
+    //}
 
-    public List<Item> findAllItems() {
+    public List<Item> findAll() {
         return itemRepository.findAll();
     }
 
@@ -32,10 +29,8 @@ public class ItemService {
     public Item getRandomItem() {
         Random random = new Random();
 
-        Integer max = findAllItems().size();
+        Integer max = findAll().size();
 
-        Integer result = random.nextInt(max - 0) + 0;
-
-        return findAllItems().get(result);
+        return findAll().get(random.nextInt(max));
     }
 }
