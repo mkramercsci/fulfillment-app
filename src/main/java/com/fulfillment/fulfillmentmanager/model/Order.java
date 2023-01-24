@@ -1,17 +1,27 @@
 package com.fulfillment.fulfillmentmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
 public class Order {
+
+    // mapping all database columns to Entity values
+
     @Id
     public Integer id;
 
     @ManyToOne
     @JoinColumn(name = "name_id")
     public Name name;
+
+    @OneToMany(mappedBy = "order")
+    @JsonIgnore
+    private List<BatchDetails> batchDetailsList;
 
     public Integer getId() {
         return id;

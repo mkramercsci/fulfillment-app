@@ -1,5 +1,7 @@
 package com.fulfillment.fulfillmentmanager;
 
+import com.fulfillment.fulfillmentmanager.model.Batch;
+import com.fulfillment.fulfillmentmanager.model.BatchDetails;
 import com.fulfillment.fulfillmentmanager.model.Department;
 import com.fulfillment.fulfillmentmanager.model.Item;
 import com.fulfillment.fulfillmentmanager.repo.DepartmentRepository;
@@ -15,6 +17,10 @@ import java.util.Optional;
 // database columns are underscored (dept_id)
 // class objects are camelCase (deptId)
 
+// ORDER OF PARAMETERS & ids
+// batch id > order id > dept id > item id
+//
+
 @SpringBootApplication
 public class FulfillmentmanagerApplication {
 
@@ -22,6 +28,7 @@ public class FulfillmentmanagerApplication {
 
 		SpringApplication.run(FulfillmentmanagerApplication.class, args);
 
+		BatchDetails newRecord = new BatchDetails();
 	}
 
 }

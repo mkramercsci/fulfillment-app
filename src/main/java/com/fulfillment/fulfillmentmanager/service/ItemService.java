@@ -17,15 +17,11 @@ public class ItemService {
         this.itemRepository = itemRepo;
     }
 
-    //public List<Item> findByDeptId(Integer id) {
-        //return itemRepository.findByDeptId(id);
-    //}
-
     public List<Item> findAll() {
         return itemRepository.findAll();
     }
 
-    // return one randomly selected item from the list of 128 items
+    // return one random item from the list of 128 items
     public Item getRandomItem() {
         Random random = new Random();
 
@@ -33,11 +29,6 @@ public class ItemService {
 
         return findAll().get(random.nextInt(max));
 
-    }
-
-    public String testing () {
-
-        return Integer.toString(findAll().size());
     }
 
 }

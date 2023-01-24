@@ -1,5 +1,6 @@
 package com.fulfillment.fulfillmentmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.List;
 @Entity
 @Table(name = "departments")
 public class Department {
+
+    // mapping all database columns to Entity values
+
     @Id
     private Integer id;
 
@@ -15,6 +19,8 @@ public class Department {
 
     @OneToMany(mappedBy = "department")
     private List<Item> items;
+
+    // getters and setters
 
     public Integer getId() {
         return id;

@@ -1,15 +1,27 @@
 package com.fulfillment.fulfillmentmanager.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "batches")
 public class Batch {
-    @Id
-    public Integer id;
 
+    // mapping all database columns to Entity values
+
+    @Id
+    private Integer id;
+
+    @OneToMany(mappedBy = "batch")
+    @JsonIgnore
+    private List<BatchDetails> batchDetailsList;
+
+    @Column(name="complete", nullable = false, columnDefinition = "boolean default false")
+    private Boolean complete;
+
+    // getters and setters
     public Integer getId() {
         return id;
     }
@@ -17,4 +29,14 @@ public class Batch {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    // aka getComplete
+    public Boolean isComplete() {
+        return complete;
+    }
+
+    public void setComplete(Boolean complete) {
+        this.complete = complete;
+    }
+
 }

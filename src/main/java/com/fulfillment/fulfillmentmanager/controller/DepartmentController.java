@@ -20,6 +20,15 @@ public class DepartmentController {
         this.deptService = deptService;
     }
 
+    // get a list of all departments
+    // 0 - grocery
+    // 1 - chemicals
+    // 2 - clothes
+    // 3 - accessories
+    // 4 - seasonal
+    // 5 - furniture
+    // 6 - electronics
+    // 7 - salesfloor
     @GetMapping("/all")
     public ResponseEntity<List<Department>> getAllDepartments () {
         List<Department> departments = deptService.findAll();

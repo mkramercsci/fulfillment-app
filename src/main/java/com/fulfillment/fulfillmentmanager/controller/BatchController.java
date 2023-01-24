@@ -12,12 +12,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/batches")
 public class BatchController {
+
     private final BatchService batchService;
 
     public BatchController(BatchService batchService) {
         this.batchService = batchService;
     }
 
+    // get a list of all batches and their completion status
     @GetMapping("/all")
     public ResponseEntity<List<Batch>> findAll () {
         List<Batch> batches = batchService.findAll();
@@ -25,10 +27,11 @@ public class BatchController {
         return new ResponseEntity<>(batches, HttpStatus.OK);
     }
 
-    // http request should send an empty JSON object, the Id is randomly generated in BatchService
+    // add a new batch to the list
     @PostMapping("/add")
     public ResponseEntity<Batch> addBatch(@RequestBody Batch batch) {
         Batch newBatch = batchService.addBatch(batch);
         return new ResponseEntity<>(newBatch, HttpStatus.CREATED);
     }
+
 }

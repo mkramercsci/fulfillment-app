@@ -9,6 +9,9 @@ import java.util.List;
 @Entity
 @Table(name = "names")
 public class Name {
+
+    // mapping all database columns to Entity values
+
     @Id
     public Integer id;
 

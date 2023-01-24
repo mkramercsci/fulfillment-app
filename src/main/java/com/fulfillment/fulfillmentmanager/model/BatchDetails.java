@@ -1,25 +1,31 @@
 package com.fulfillment.fulfillmentmanager.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "batch_details")
+@IdClass(BatchDetailsId.class)
 public class BatchDetails {
+
+    // mapping all database columns to Entity values
+
     @Id
-    @Column(name = "dept_id", nullable = false)
-    public Integer deptId;
+    @ManyToOne
+    @JoinColumn(name = "batch_id")
+    public Batch batch;
 
-    @Column(name = "item_id", nullable = false)
-    public Integer itemId;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    public Order order;
 
-    @Column(name = "order_id", nullable = false)
-    public Integer orderId;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "item_id", nullable = false)
+    public Item item;
 
-    @Column(name = "batch_id", nullable = false)
-    public Integer batchId;
+    @Column(name="complete", nullable = false, columnDefinition = "boolean default false")
+    private Boolean complete;
 
     @Column(nullable = false)
     public Integer quantity;

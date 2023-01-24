@@ -21,16 +21,14 @@ public class ItemController {
         this.itemService = itemService;
     }
 
+    // get a list of 128 total items
+    // 16 items * 8 departments = 128 total items
     @GetMapping("/all")
     public List<Item> getAllItems () {
         return itemService.findAll();
     }
 
-    //@GetMapping("/{deptId}")
-    //public List<Item> findByDeptId (@PathVariable ("deptId") Integer id) {
-        //return itemService.findByDeptId(id);
-    //}
-
+    // get a single random item
     @GetMapping("/random")
     public Item getRandomItem () {
         return itemService.getRandomItem();

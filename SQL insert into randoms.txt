@@ -1,0 +1,22 @@
+// new orders record with random order number and name
+
+INSERT INTO orders (id, name_id) SELECT
+	(SELECT RANDOM() * 99999999) AS id,
+	(SELECT id FROM names ORDER BY RANDOM() LIMIT 1) AS name_id;
+
+// new batches record with random batch no
+
+INSERT INTO batches (id) SELECT
+    (SELECT RANDOM() * 999) AS id;
+
+// new batch_details record with random batch and order. department=0(grocery) and item selected from dept 0
+
+INSERT INTO batch_details (batch_id, order_id, dept_id, item_id, quantity) SELECT
+	(SELECT id FROM batches ORDER BY RANDOM() LIMIT 1) AS batch_id,
+	(SELECT id FROM orders ORDER BY RANDOM() LIMIT 1) AS order_id,
+	0,
+	(SELECT id FROM items WHERE dept_id = 0 ORDER BY RANDOM() LIMIT 1) AS item_id,
+	2;
+
+
+	
