@@ -13,6 +13,9 @@ public class Department {
     @Column(name = "dept_name", nullable = false)
     private String deptName;
 
+    @OneToMany(mappedBy = "department")
+    private List<Item> items;
+
     public Integer getId() {
         return id;
     }
@@ -37,6 +40,4 @@ public class Department {
                 '}';
     }
 
-    @OneToMany(mappedBy = "department")
-    private List<Item> items;
 }

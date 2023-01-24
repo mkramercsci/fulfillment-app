@@ -1,5 +1,6 @@
 package com.fulfillment.fulfillmentmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -15,6 +16,7 @@ public class Name {
     public String personName;
 
     @OneToMany(mappedBy = "name")
+    @JsonIgnore
     public List<Order> orders;
 
     public Integer getId() {
@@ -25,5 +27,11 @@ public class Name {
         return personName;
     }
 
-
+    @Override
+    public String toString() {
+        return "Name{" +
+                "id=" + id +
+                ", personName='" + personName + '\'' +
+                '}';
+    }
 }

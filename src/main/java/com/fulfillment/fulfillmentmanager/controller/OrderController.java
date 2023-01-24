@@ -30,10 +30,4 @@ public class OrderController {
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 
-    // dummy method for checking attributes
-    @GetMapping("/testing")
-    public String testing (){
-
-        return orderService.testing();
-    }
 }

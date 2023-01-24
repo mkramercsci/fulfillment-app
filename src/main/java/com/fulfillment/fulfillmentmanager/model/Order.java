@@ -11,7 +11,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "name_id")
-    private Name name;
+    public Name name;
 
     public Integer getId() {
         return id;
@@ -21,11 +21,19 @@ public class Order {
         this.id = id;
     }
 
-    public Name getCustomerName() {
+    public Name getName() {
         return name;
     }
 
-    public void setCustomerName(Name customerName) {
-        this.name = customerName;
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", name=" + name +
+                '}';
     }
 }

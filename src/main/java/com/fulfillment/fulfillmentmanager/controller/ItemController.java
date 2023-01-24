@@ -36,10 +36,4 @@ public class ItemController {
         return itemService.getRandomItem();
     }
 
-    // dummy method for checking attributes
-    @GetMapping("/testing")
-    public String testing () {
-
-        return itemService.testing();
-    }
 }
