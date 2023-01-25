@@ -1,7 +1,5 @@
 package com.fulfillment.fulfillmentmanager.model;
 
-import jakarta.persistence.IdClass;
-
 import java.io.Serializable;
 
 // code referenced from here

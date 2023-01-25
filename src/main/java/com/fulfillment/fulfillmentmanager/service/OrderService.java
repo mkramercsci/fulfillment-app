@@ -1,6 +1,5 @@
 package com.fulfillment.fulfillmentmanager.service;
 
-import com.fulfillment.fulfillmentmanager.model.Batch;
 import com.fulfillment.fulfillmentmanager.model.Name;
 import com.fulfillment.fulfillmentmanager.model.Order;
 import com.fulfillment.fulfillmentmanager.repo.NameRepository;
@@ -28,9 +27,11 @@ public class OrderService {
     }
 
     // add a new order with randomly generated name and id
-    public Order addOrder (Order order) {
+    public Order addOrder () {
 
-        // order Id should always be 8 digits
+        Order order = new Order();
+
+        // orderId should always be 8 digits
         order.setId(random.nextInt(99999999 - 10000000) + 10000000);
 
         // generate a random name and set it to the new order
@@ -40,5 +41,4 @@ public class OrderService {
 
         return orderRepository.save(order);
     }
-
 }

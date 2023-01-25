@@ -1,6 +1,5 @@
 package com.fulfillment.fulfillmentmanager.controller;
 
-import com.fulfillment.fulfillmentmanager.model.Batch;
 import com.fulfillment.fulfillmentmanager.model.Order;
 import com.fulfillment.fulfillmentmanager.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -26,9 +25,9 @@ public class OrderController {
 
     // add a new order into the system
     @PostMapping("/add")
-    public ResponseEntity<Order> addOrder(@RequestBody Order order) {
+    public ResponseEntity<Order> addOrder() {
 
-        Order newOrder = orderService.addOrder(order);
+        Order newOrder = orderService.addOrder();
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 

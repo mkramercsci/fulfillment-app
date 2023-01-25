@@ -34,4 +34,9 @@ public class BatchController {
         return new ResponseEntity<>(newBatch, HttpStatus.CREATED);
     }
 
+    @GetMapping("/testing")
+    public void testing () {
+        batchService.testing();
+    }
+
 }

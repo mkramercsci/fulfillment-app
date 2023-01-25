@@ -1,6 +1,5 @@
 package com.fulfillment.fulfillmentmanager.controller;
 
-import com.fulfillment.fulfillmentmanager.model.Batch;
 import com.fulfillment.fulfillmentmanager.model.BatchDetails;
 import com.fulfillment.fulfillmentmanager.service.BatchDetailsService;
 import org.springframework.http.HttpStatus;

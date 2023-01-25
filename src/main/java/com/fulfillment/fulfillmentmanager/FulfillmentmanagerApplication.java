@@ -28,7 +28,6 @@ public class FulfillmentmanagerApplication {
 
 		SpringApplication.run(FulfillmentmanagerApplication.class, args);
 
-		BatchDetails newRecord = new BatchDetails();
 	}
 
 }
