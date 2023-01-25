@@ -29,7 +29,8 @@ CREATE TABLE public.batch_details (
     item_id integer NOT NULL,
     dept_id integer NOT NULL,
     quantity integer NOT NULL,
-    batch_id integer NOT NULL
+    batch_id integer NOT NULL,
+    complete boolean DEFAULT false NOT NULL
 );
 
 
@@ -40,7 +41,8 @@ ALTER TABLE public.batch_details OWNER TO fulfillmentuser;
 --
 
 CREATE TABLE public.batches (
-    id integer NOT NULL
+    id integer NOT NULL,
+    complete boolean DEFAULT false NOT NULL
 );
 
 
@@ -99,7 +101,24 @@ ALTER TABLE public.orders OWNER TO fulfillmentuser;
 -- Data for Name: batch_details; Type: TABLE DATA; Schema: public; Owner: fulfillmentuser
 --
 
-COPY public.batch_details (order_id, item_id, dept_id, quantity, batch_id) FROM stdin;
+COPY public.batch_details (order_id, item_id, dept_id, quantity, batch_id, complete) FROM stdin;
+53339143	1883	0	2	415	f
+29540959	2330	0	2	45	f
+53339143	2941	0	2	196	f
+44306399	9693	0	2	432	f
+75165089	2535	0	2	172	f
+53339143	5557	0	2	828	f
+20631218	2330	0	2	172	f
+20631218	9735	0	2	445	f
+44306399	1159	0	2	948	f
+53339143	2330	0	2	445	f
+53339143	9669	0	2	415	f
+29540959	2941	0	2	432	f
+49882660	2535	0	2	432	f
+53339143	7826	0	2	172	f
+29540959	2535	0	2	948	f
+44306399	1709	0	2	507	f
+53339143	1173	0	2	507	f
 \.
 
 
@@ -107,9 +126,20 @@ COPY public.batch_details (order_id, item_id, dept_id, quantity, batch_id) FROM 
 -- Data for Name: batches; Type: TABLE DATA; Schema: public; Owner: fulfillmentuser
 --
 
-COPY public.batches (id) FROM stdin;
-420
-727
+COPY public.batches (id, complete) FROM stdin;
+432	f
+415	f
+828	f
+642	f
+172	f
+514	f
+45	f
+919	f
+507	f
+445	f
+196	f
+250	f
+948	f
 \.
 
 
@@ -7060,7 +7090,12 @@ Elianna	6782
 --
 
 COPY public.orders (id, name_id) FROM stdin;
-45197665	1
+44306399	4045
+29540959	3050
+75165089	4567
+53339143	4979
+49882660	1522
+20631218	3225
 \.
 
 
@@ -7069,7 +7104,7 @@ COPY public.orders (id, name_id) FROM stdin;
 --
 
 ALTER TABLE ONLY public.batch_details
-    ADD CONSTRAINT batch_details_pkey PRIMARY KEY (batch_id, dept_id, item_id);
+    ADD CONSTRAINT batch_details_pkey PRIMARY KEY (batch_id, order_id, dept_id, item_id);
 
 
 --
