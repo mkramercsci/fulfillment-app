@@ -14,8 +14,8 @@ public class Batch {
     @Id
     private Integer id;
 
-    @OneToMany(mappedBy = "batch")
     @JsonIgnore
+    @OneToMany(mappedBy = "batch", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BatchDetails> batchDetailsList;
 
     @Column(name="complete", nullable = false, columnDefinition = "boolean default false")

@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface ItemRepository extends ReadOnlyRepository<Item, Integer> {
 
-    //List<Item> findByDeptId(Integer deptId);
 }

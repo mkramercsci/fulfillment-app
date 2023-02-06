@@ -3,7 +3,9 @@ package com.fulfillment.fulfillmentmanager.service;
 import com.fulfillment.fulfillmentmanager.model.Batch;
 import com.fulfillment.fulfillmentmanager.model.Item;
 import com.fulfillment.fulfillmentmanager.model.Order;
+import com.fulfillment.fulfillmentmanager.repo.BatchDetailsRepository;
 import com.fulfillment.fulfillmentmanager.repo.BatchRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +22,18 @@ public class BatchService {
     private final BatchDetailsService batchDetailsService;
 
     Random random = new Random();
+    private final BatchDetailsRepository batchDetailsRepository;
 
     @Autowired
     public BatchService(BatchRepository batchRepository, OrderService orderService, ItemService itemService,
-                        BatchDetailsService batchDetailsService) {
+                        BatchDetailsService batchDetailsService,
+                        BatchDetailsRepository batchDetailsRepository) {
 
         this.batchRepository = batchRepository;
         this.orderService = orderService;
         this.itemService = itemService;
         this.batchDetailsService = batchDetailsService;
+        this.batchDetailsRepository = batchDetailsRepository;
     }
 
     // get all existing batches
@@ -36,6 +41,12 @@ public class BatchService {
         return batchRepository.findAll();
     }
 
+    @Transactional
+    public void deleteBatch (Integer id) {
+        batchRepository.deleteById(id);
+    }
+
+    // generate a new batch associated with 35 quantity of batch details
     public Batch addBatch (Batch batch) {
 
         // batch ids should always be 3 digits
@@ -68,7 +79,7 @@ public class BatchService {
             Integer rangeMax = maxQuantity - totalQuantity;
 
             // get a new quantity and update the batch total
-            newQuantity = getNewQuantity(maxQuantity, totalQuantity, rangeMax);
+            newQuantity = getNewQuantity(rangeMax);
             totalQuantity += newQuantity;
 
             // add a new record to the batch details repository
@@ -79,6 +90,7 @@ public class BatchService {
         return batch;
     }
 
+    // helper function for addBatch
     // determine using 80/20 ratio whether to create a new value
     private Boolean createNewValue() {
 
@@ -94,8 +106,9 @@ public class BatchService {
         }
     }
 
+    // helper function for addBatch
     // generate a new random quantity
-    private Integer getNewQuantity (Integer maxQuantity, Integer totalQuantity, Integer rangeMax) {
+    private Integer getNewQuantity (Integer rangeMax) {
 
         Integer newQuantity;
         Integer restrictedMax = 4;

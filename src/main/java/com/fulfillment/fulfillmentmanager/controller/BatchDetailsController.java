@@ -4,9 +4,7 @@ import com.fulfillment.fulfillmentmanager.model.BatchDetails;
 import com.fulfillment.fulfillmentmanager.service.BatchDetailsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,4 +25,11 @@ public class BatchDetailsController {
         return new ResponseEntity<>(batchDetails, HttpStatus.OK);
     }
 
+    // get the 35 items that belong to a particular batch
+    @GetMapping("/{batchId}")
+    public ResponseEntity<List<BatchDetails>> findByBatchId (@PathVariable("batchId") Integer batchId) {
+        List<BatchDetails> batchDetails = batchDetailsService.findByBatchId(batchId);
+
+        return new ResponseEntity<>(batchDetails, HttpStatus.OK);
+    }
 }

@@ -39,4 +39,11 @@ public class BatchController {
         batchService.testing();
     }
 
+    // delete the batch and all associated batch details
+    @DeleteMapping("/delete/{batchId}")
+    public ResponseEntity<?> deleteBatchById(@PathVariable("batchId") Integer id) {
+        batchService.deleteBatch(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

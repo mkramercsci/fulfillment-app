@@ -20,8 +20,11 @@ public class BatchDetailsService {
     }
 
     public List<BatchDetails> findAll() {
-
         return batchDetailsRepository.findAll();
+    }
+
+    public List<BatchDetails> findByBatchId(Integer batchId) {
+        return batchDetailsRepository.findByBatchId(batchId);
     }
 
     // insert a new record with valid data into the database
