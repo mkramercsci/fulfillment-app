@@ -31,14 +31,17 @@ public class BatchDetailsService {
     public BatchDetails add(Batch batch, Order order, Item item, Integer quantity) {
         BatchDetails batchDetails = new BatchDetails();
 
-        batchDetails.setBatch(batch);
-        batchDetails.setOrder(order);
-        batchDetails.setDepartment(item.department);
-        batchDetails.setItem(item);
+        batchDetails.id.setBatch(batch);
+        batchDetails.id.setOrder(order);
+        batchDetails.id.setDepartment(item.department);
+        batchDetails.id.setItem(item);
         batchDetails.setQuantity(quantity);
-        batchDetails.setComplete(false);
+        batchDetails.setPicked(false);
 
         return batchDetailsRepository.save(batchDetails);
     }
 
+    public void deleteByBatchId(Integer id) {
+        batchDetailsRepository.deleteByBatchId(id);
+    }
 }

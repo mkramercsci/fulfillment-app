@@ -4,75 +4,56 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "batch_details")
-@IdClass(BatchDetailsId.class)
 public class BatchDetails {
 
-    // mapping all database columns to Entity values
+    @EmbeddedId
+    public BatchDetailsId id;
 
-    @Id
+    @MapsId("batchId")
     @ManyToOne
-    @JoinColumn(name = "batch_id")
     private Batch batch;
 
-    @Id
+    @MapsId("orderId")
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    @Id
+    @MapsId("deptId")
     @ManyToOne
-    @JoinColumn(name = "item_id", nullable = false)
-    private Item item;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name="dept_id", nullable = false)
+    @JoinColumn(name="dept_id") // match database column name
     private Department department;
 
-    @Column(name="complete", nullable = false, columnDefinition = "boolean default false")
-    private Boolean complete;
+    @MapsId("itemId")
+    @ManyToOne
+    private Item item;
+
+    @Column(name="picked", nullable = false, columnDefinition = "boolean default false")
+    private Boolean picked;
 
     @Column(nullable = false)
     private Integer quantity;
 
-    public Batch getBatch() {
-        return batch;
-    }
+    // constructors
 
-    public void setBatch(Batch batch) {
+    public BatchDetails() {}
+
+    public BatchDetails(BatchDetailsId id, Batch batch, Order order, Department department, Item item, Boolean picked, Integer quantity) {
+        this.id = id;
         this.batch = batch;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
         this.order = order;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
         this.department = department;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
         this.item = item;
+        this.picked = picked;
+        this.quantity = quantity;
     }
 
-    public Boolean getComplete() {
-        return complete;
+    // getters and setters
+
+    public Boolean isPicked() {
+        return picked;
     }
 
-    public void setComplete(Boolean complete) {
-        this.complete = complete;
+    public void setPicked(Boolean picked) {
+        this.picked = picked;
     }
 
     public Integer getQuantity() {

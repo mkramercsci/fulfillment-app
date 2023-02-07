@@ -19,8 +19,6 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private List<Item> items;
 
-    @OneToMany(mappedBy = "department")
-    private List<BatchDetails> batchDetailsList;
     // getters and setters
 
     public Integer getId() {

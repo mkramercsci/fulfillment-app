@@ -17,8 +17,8 @@ public class Name {
     @Column(name="person_name")
     public String personName;
 
-    @OneToMany(mappedBy = "name")
     @JsonIgnore
+    @OneToMany(mappedBy = "name")
     public List<Order> orders;
 
     public Integer getId() {

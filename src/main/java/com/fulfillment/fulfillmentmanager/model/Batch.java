@@ -9,14 +9,8 @@ import java.util.List;
 @Table(name = "batches")
 public class Batch {
 
-    // mapping all database columns to Entity values
-
     @Id
     private Integer id;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "batch", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BatchDetails> batchDetailsList;
 
     @Column(name="complete", nullable = false, columnDefinition = "boolean default false")
     private Boolean complete;

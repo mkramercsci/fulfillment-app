@@ -18,10 +18,6 @@ public class Order {
     @JoinColumn(name = "name_id")
     public Name name;
 
-    @OneToMany(mappedBy = "order")
-    @JsonIgnore
-    private List<BatchDetails> batchDetailsList;
-
     public Integer getId() {
         return id;
     }

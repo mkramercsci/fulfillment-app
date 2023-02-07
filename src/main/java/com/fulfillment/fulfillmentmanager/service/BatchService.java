@@ -43,6 +43,8 @@ public class BatchService {
 
     @Transactional
     public void deleteBatch (Integer id) {
+        // the details should always get deleted before the batch itself
+        batchDetailsService.deleteByBatchId(id);
         batchRepository.deleteById(id);
     }
 

@@ -21,7 +21,29 @@ public class Item {
     @JoinColumn(name = "dept_id")
     public Department department;
 
-    @OneToMany
-    @JsonIgnore
-    private List<BatchDetails> batchDetailsList;
+    // getters and setters
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 }
