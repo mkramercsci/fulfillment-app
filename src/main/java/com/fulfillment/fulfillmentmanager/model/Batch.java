@@ -33,4 +33,11 @@ public class Batch {
         this.complete = complete;
     }
 
+    @Override
+    public String toString() {
+        return "Batch{" +
+                "id=" + id +
+                ", complete=" + complete +
+                '}';
+    }
 }

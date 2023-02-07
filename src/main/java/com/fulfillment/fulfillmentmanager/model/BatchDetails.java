@@ -34,19 +34,70 @@ public class BatchDetails {
 
     // constructors
 
-    public BatchDetails() {}
+    public BatchDetails() {
+        this.id = new BatchDetailsId();
 
-    public BatchDetails(BatchDetailsId id, Batch batch, Order order, Department department, Item item, Boolean picked, Integer quantity) {
+        this.batch = new Batch();
+        this.order = new Order();
+        this.department = new Department();
+        this.item = new Item();
+
+        this.picked = false;
+        this.quantity = 0;
+    }
+
+    public BatchDetails(BatchDetailsId id, Batch batch, Order order, Department department, Item item, Integer quantity) {
         this.id = id;
-        this.batch = batch;
-        this.order = order;
-        this.department = department;
-        this.item = item;
-        this.picked = picked;
-        this.quantity = quantity;
+        this.id.setBatch(batch);
+        this.id.setOrder(order);
+        this.id.setDepartment(department);
+        this.id.setItem(item);
+
+        this.setPicked(false);
+        this.setQuantity(quantity);
     }
 
     // getters and setters
+
+    public BatchDetailsId getId() {
+        return id;
+    }
+
+    public void setId(BatchDetailsId id) {
+        this.id = id;
+    }
+
+    public Batch getBatch() {
+        return batch;
+    }
+
+    public void setBatch(Batch batch) {
+        this.batch = batch;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
 
     public Boolean isPicked() {
         return picked;
@@ -62,5 +113,18 @@ public class BatchDetails {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "BatchDetails{" +
+                "id=" + id +
+                ", batch=" + batch +
+                ", order=" + order +
+                ", department=" + department +
+                ", item=" + item +
+                ", picked=" + picked +
+                ", quantity=" + quantity +
+                '}';
     }
 }

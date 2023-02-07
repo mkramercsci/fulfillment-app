@@ -23,6 +23,13 @@ public class BatchDetailsId implements Serializable {
 
     private Integer itemId;
 
+    public BatchDetailsId(Integer batchId, Integer orderId, Integer deptId, Integer itemId) {
+        this.batchId = batchId;
+        this.orderId = orderId;
+        this.deptId = deptId;
+        this.itemId = itemId;
+    }
+
     public BatchDetailsId() {}
 
     @Override
@@ -69,4 +76,13 @@ public class BatchDetailsId implements Serializable {
         this.itemId = item.getId();
     }
 
+    @Override
+    public String toString() {
+        return "BatchDetailsId{" +
+                "batchId=" + batchId +
+                ", orderId=" + orderId +
+                ", deptId=" + deptId +
+                ", itemId=" + itemId +
+                '}';
+    }
 }

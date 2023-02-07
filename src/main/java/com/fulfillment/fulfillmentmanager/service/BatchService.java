@@ -1,6 +1,7 @@
 package com.fulfillment.fulfillmentmanager.service;
 
 import com.fulfillment.fulfillmentmanager.model.Batch;
+import com.fulfillment.fulfillmentmanager.model.BatchDetailsId;
 import com.fulfillment.fulfillmentmanager.model.Item;
 import com.fulfillment.fulfillmentmanager.model.Order;
 import com.fulfillment.fulfillmentmanager.repo.BatchDetailsRepository;
@@ -61,21 +62,22 @@ public class BatchService {
         Integer totalQuantity = 0;
         Integer newQuantity = 0;
 
-        //initialize the batch with an order and item
-        Order order;
-        Item item;
+        //initialize the batch with an id, order and item
+        BatchDetailsId newId;
+        Order newOrder;
+        Item newItem;
 
         // loop until the batch contains 35 quantity
         do {
             // get an order
-            // 20% chance we use the order from the previous loop
+            // 20% chance we use the order from the previous loop to simulate customers ordering multiple items
             if (createNewValue()) {
-                order = orderService.addOrder();
+                newOrder = orderService.addOrder();
             }
             else { continue; }
 
             // get a random item
-            item = itemService.getRandomItem();
+            newItem = itemService.getRandomItem();
 
             // how much free space is left in the batch?
             Integer rangeMax = maxQuantity - totalQuantity;
@@ -84,8 +86,11 @@ public class BatchService {
             newQuantity = getNewQuantity(rangeMax);
             totalQuantity += newQuantity;
 
+            //populate the id with valid integers
+            newId = new BatchDetailsId(batch.getId(), newOrder.getId(), newItem.getDepartment().getId(), newItem.getId());
+
             // add a new record to the batch details repository
-            batchDetailsService.add(batch, order, item, newQuantity);
+            batchDetailsService.add(newId, batch, newOrder, newItem, newQuantity);
 
         } while (totalQuantity < maxQuantity);
 

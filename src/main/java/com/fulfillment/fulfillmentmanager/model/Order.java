@@ -12,7 +12,7 @@ public class Order {
     // mapping all database columns to Entity values
 
     @Id
-    public Integer id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "name_id")

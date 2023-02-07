@@ -12,7 +12,7 @@ public class Name {
     // mapping all database columns to Entity values
 
     @Id
-    public Integer id;
+    private Integer id;
 
     @Column(name="person_name")
     public String personName;
