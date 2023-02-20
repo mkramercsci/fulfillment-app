@@ -23,7 +23,6 @@ public class BatchService {
     private final BatchDetailsService batchDetailsService;
 
     Random random = new Random();
-    private final BatchDetailsRepository batchDetailsRepository;
 
     @Autowired
     public BatchService(BatchRepository batchRepository, OrderService orderService, ItemService itemService,
@@ -34,19 +33,28 @@ public class BatchService {
         this.orderService = orderService;
         this.itemService = itemService;
         this.batchDetailsService = batchDetailsService;
-        this.batchDetailsRepository = batchDetailsRepository;
     }
 
-    // get all existing batches
+    // get all incomplete batches
     public List<Batch> findAll() {
-        return batchRepository.findAll();
+        return batchRepository.findByComplete(false);
     }
+
+    public List<Batch> findByComplete () { return batchRepository.findByComplete(true); }
 
     @Transactional
     public void deleteBatch (Integer id) {
         // the details should always get deleted before the batch itself
         batchDetailsService.deleteByBatchId(id);
         batchRepository.deleteById(id);
+    }
+
+    // delete EVERYTHING from batch_details, orders, and batches
+    @Transactional
+    public void deleteAll () {
+        batchDetailsService.deleteAll();
+        batchRepository.deleteAll();
+        orderService.deleteAll();
     }
 
     // generate a new batch associated with 35 quantity of batch details
@@ -135,44 +143,5 @@ public class BatchService {
         // generate and return a valid quantity
         newQuantity = random.nextInt(1, rangeMax);
         return newQuantity;
-    }
-
-    // method for testing
-    public void testing () {
-    /*        Integer maxQuantity = 35;
-        Integer totalQuantity = 0;
-        Integer newQuantity = 0;
-
-        do {
-            // how much free space is left?
-            Integer rangeMax = maxQuantity - totalQuantity;
-
-            // this program should never return a value larger than 8
-            if (rangeMax > 8) {
-                rangeMax = 8;
-            }
-            else if (rangeMax == 1) {
-                newQuantity = 1;
-                break;
-            }
-
-            String printMe = rangeMax + " | "+ newQuantity + " | " + totalQuantity;
-            System.out.println(printMe);
-
-            do {
-                newQuantity = random.nextInt(1, rangeMax);
-
-            } while (totalQuantity + newQuantity > maxQuantity);
-
-            totalQuantity += newQuantity;
-
-        } while (totalQuantity < maxQuantity);
-
-        totalQuantity += newQuantity;
-
-        String done = "Finished with total quantity: " + totalQuantity;
-        System.out.println(done);
-
-    */
     }
 }

@@ -41,4 +41,8 @@ public class OrderService {
 
         return orderRepository.save(order);
     }
+
+    public void deleteAll() {
+        orderRepository.deleteAll();
+    }
 }

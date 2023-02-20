@@ -49,4 +49,8 @@ public class BatchDetailsService {
     public void deleteByBatchId(Integer id) {
         batchDetailsRepository.deleteByBatchId(id);
     }
+
+    public void deleteAll() {
+        batchDetailsRepository.deleteAll();
+    }
 }

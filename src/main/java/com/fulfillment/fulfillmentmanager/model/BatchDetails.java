@@ -1,5 +1,6 @@
 package com.fulfillment.fulfillmentmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class BatchDetails {
 
     @MapsId("deptId")
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="dept_id") // match database column name
     private Department department;
 

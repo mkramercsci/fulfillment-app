@@ -1,0 +1,63 @@
+FULFILLMENT-APP NOTES: PostgreSQL | Spring Boot | Angular 
+
+DATABASE DESIGN
+I began with designing a six table database where all other tables support a central table batch_details
+
+batches 
+	-id
+	-completed
+  	Faces the user and organizes orders into pickable lists of items. Indexes batch_details for corresponding records. Gets marked as completed once all batch_details have been picked.
+    
+orders 
+	-id
+  -name_id
+  	Indexes batch_details for corresponding records. Indexes names for a customer's name
+  
+departments
+	-id
+	-dept_name
+   	Places items in an appropriate store category       
+		  0 | grocery
+		  1 | chemicals
+		  2 | clothes
+		  3 | accessories
+		  4 | seasonal
+		  5 | furniture
+		  6 | electronics
+		  7 | salesfloor
+      
+items
+	-id
+	-dept_id
+  -item_name
+    Contains a selection of 128 items (16 per department) for the application to generate batches.
+  
+names
+	-id
+	-person_name
+  		Used as flavor text that communicates to the fulfillment employee whose order they are picking. 
+  		"Ensure Michaela's order doesn't get damaged!"
+	
+batch_details
+	-batch_id
+	-order_id
+	-dept_id
+	-item_id
+	-quantity
+	-picked
+		  References all other tables to create a summary of which customers have ordered which items, the current pick status of each item, and where those items may be located in the store. 
+
+
+OVERVIEW
+
+Departments, items, and names are strictly read only. They are selected in random combinations on creation of a new batch to simulate orders arriving at the store. Batches will always have 35 total quantity. One customer could order 35 items or 35 customers could order a single item, both make a valid batch. 
+
+Batches, orders, and batch_details are modified, created, and deleted by the fulfillment employee. When a new batch is opened, batch_details shows the 35 items they must retrieve from around the store. Pretzels are likely in the grocery department. Picking an item markes 'picked' as true in batch_details. Once all items have been picked, the batch is closed and marked as 'completed' in batches.
+
+From the completed tab the old batches can be opened, viewed, and deleted. Orders are not necessarily complete just because some items belong to a completed batch. Consider Jim, who ordered engine oil, ant traps, and a belt. All his items ended up in separate batches (and if I add a boxing system, would all go in separate boxes), but he ordered them at the same time and they will therefore be part of the same order. 
+
+On deletion of a completed batch, the Spring backend should check all order_id within that batch against the order_ids of the other batches, both complete and incomplete. If that order exists in any other batch, that order is not deleted. Otherwise, the system deletes all its orders, all its batch_details with a matching batch_id, and finally the batches record itself.
+
+BACKGROUND
+
+While I was a CS student I worked in fulfillment at a big box retailer and I had to juggle many apps. Aside from the physical responsibility of picking for online fulfillment (13 miles of walking per day!) I was also training new employees every season. Seven years in one job gave me solid knowledge of brands, categories, labels, numbering systems, and stockroom locations. Because of this I have a personal interest in virtual warehouseing and database design. I enjoyed the challenge of turning technical noise into useful snippets and tips that helped my coworkers perform best. Recreating my work environment was a fun project to teach myself the ins and outs of full stack development in Spring and Angular.

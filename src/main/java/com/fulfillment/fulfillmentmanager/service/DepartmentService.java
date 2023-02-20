@@ -11,14 +11,14 @@ import java.util.List;
 @Service
 public class DepartmentService {
 
-    //  0 | grocery
-    //  1 | chemicals
-    //  2 | clothes
-    //  3 | accessories
-    //  4 | seasonal
-    //  5 | furniture
-    //  6 | electronics
-    //  7 | salesfloor
+//      0 | grocery
+//      1 | chemicals
+//      2 | clothes
+//      3 | accessories
+//      4 | seasonal
+//      5 | furniture
+//      6 | electronics
+//      7 | salesfloor
 
     private final DepartmentRepository departmentRepository;
 

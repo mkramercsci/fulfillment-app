@@ -1,7 +1,6 @@
 package com.fulfillment.fulfillmentmanager.controller;
 
 import com.fulfillment.fulfillmentmanager.model.Batch;
-import com.fulfillment.fulfillmentmanager.model.Department;
 import com.fulfillment.fulfillmentmanager.service.BatchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +19,7 @@ public class BatchController {
     }
 
     // get a list of all batches and their completion status
+    // this returns all batches where complete = false
     @GetMapping("/all")
     public ResponseEntity<List<Batch>> findAll () {
         List<Batch> batches = batchService.findAll();
@@ -27,16 +27,21 @@ public class BatchController {
         return new ResponseEntity<>(batches, HttpStatus.OK);
     }
 
-    // add a new batch to the list
-    @PostMapping("/add")
-    public ResponseEntity<Batch> addBatch(@RequestBody Batch batch) {
-        Batch newBatch = batchService.addBatch(batch);
-        return new ResponseEntity<>(newBatch, HttpStatus.CREATED);
+    @GetMapping("/complete")
+    public ResponseEntity<List<Batch>> findByComplete () {
+        List<Batch> batches = batchService.findByComplete();
+
+        return new ResponseEntity<>(batches, HttpStatus.OK);
     }
 
-    @GetMapping("/testing")
-    public void testing () {
-        batchService.testing();
+    // add a new batch to the list
+    @PostMapping("/add")
+    public ResponseEntity<Batch> addBatch() {
+        Batch newBatch = new Batch();
+
+        batchService.addBatch(newBatch);
+
+        return new ResponseEntity<>(newBatch, HttpStatus.CREATED);
     }
 
     // delete the batch and all associated batch details
@@ -46,4 +51,8 @@ public class BatchController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete_all")
+    public void deleteAll() {
+        batchService.deleteAll();
+    }
 }

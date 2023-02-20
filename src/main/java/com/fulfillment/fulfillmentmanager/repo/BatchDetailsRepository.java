@@ -11,4 +11,6 @@ public interface BatchDetailsRepository extends JpaRepository<BatchDetails, Batc
     List<BatchDetails> findByBatchId(Integer batchId);
 
     void deleteByBatchId(Integer id);
+
+    void deleteAll();
 }
