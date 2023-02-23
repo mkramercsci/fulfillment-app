@@ -44,13 +44,19 @@ public class BatchController {
         return new ResponseEntity<>(newBatch, HttpStatus.CREATED);
     }
 
-    // delete the batch and all associated batch details
+    @PostMapping("/set-complete/{batchId}")
+    public void setComplete(@PathVariable("batchId") Integer id) {
+        batchService.setComplete(id);
+    }
+
+    // delete the batch and associated batch details
     @DeleteMapping("/delete/{batchId}")
     public ResponseEntity<?> deleteBatchById(@PathVariable("batchId") Integer id) {
         batchService.deleteBatch(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // delete everything from repositories orders, batches, batch_details
     @DeleteMapping("/delete_all")
     public void deleteAll() {
         batchService.deleteAll();

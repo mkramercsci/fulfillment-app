@@ -6,6 +6,7 @@ import com.fulfillment.fulfillmentmanager.model.Item;
 import com.fulfillment.fulfillmentmanager.model.Order;
 import com.fulfillment.fulfillmentmanager.repo.BatchDetailsRepository;
 import com.fulfillment.fulfillmentmanager.repo.BatchRepository;
+import com.fulfillment.fulfillmentmanager.repo.OrderRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,16 +24,19 @@ public class BatchService {
     private final BatchDetailsService batchDetailsService;
 
     Random random = new Random();
+    private final OrderRepository orderRepository;
 
     @Autowired
     public BatchService(BatchRepository batchRepository, OrderService orderService, ItemService itemService,
                         BatchDetailsService batchDetailsService,
-                        BatchDetailsRepository batchDetailsRepository) {
+                        BatchDetailsRepository batchDetailsRepository,
+                        OrderRepository orderRepository) {
 
         this.batchRepository = batchRepository;
         this.orderService = orderService;
         this.itemService = itemService;
         this.batchDetailsService = batchDetailsService;
+        this.orderRepository = orderRepository;
     }
 
     // get all incomplete batches
@@ -41,6 +45,10 @@ public class BatchService {
     }
 
     public List<Batch> findByComplete () { return batchRepository.findByComplete(true); }
+
+    public void setComplete (Integer id) {
+        batchRepository.updateComplete(id);
+    }
 
     @Transactional
     public void deleteBatch (Integer id) {

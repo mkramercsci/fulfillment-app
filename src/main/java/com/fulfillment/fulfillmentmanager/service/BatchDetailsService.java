@@ -53,4 +53,5 @@ public class BatchDetailsService {
     public void deleteAll() {
         batchDetailsRepository.deleteAll();
     }
+
 }
