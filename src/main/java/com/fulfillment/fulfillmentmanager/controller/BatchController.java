@@ -18,22 +18,6 @@ public class BatchController {
         this.batchService = batchService;
     }
 
-    // get a list of all batches and their completion status
-    // this returns all batches where complete = false
-    @GetMapping("/all")
-    public ResponseEntity<List<Batch>> findAll () {
-        List<Batch> batches = batchService.findAll();
-
-        return new ResponseEntity<>(batches, HttpStatus.OK);
-    }
-
-    @GetMapping("/complete")
-    public ResponseEntity<List<Batch>> findByComplete () {
-        List<Batch> batches = batchService.findByComplete();
-
-        return new ResponseEntity<>(batches, HttpStatus.OK);
-    }
-
     // add a new batch to the list
     @PostMapping("/add")
     public ResponseEntity<Batch> addBatch() {
@@ -44,6 +28,24 @@ public class BatchController {
         return new ResponseEntity<>(newBatch, HttpStatus.CREATED);
     }
 
+    // this does not actually return all, it returns all batches where complete = false
+    // to represent work that still needs to be done
+    @GetMapping("/all")
+    public ResponseEntity<List<Batch>> findAll () {
+        List<Batch> batches = batchService.findAll();
+
+        return new ResponseEntity<>(batches, HttpStatus.OK);
+    }
+
+    // get all completed batches (batches whose batch_details have all been picked)
+    @GetMapping("/complete")
+    public ResponseEntity<List<Batch>> findByComplete () {
+        List<Batch> batches = batchService.findByComplete();
+
+        return new ResponseEntity<>(batches, HttpStatus.OK);
+    }
+
+    // mark a whole batch as complete
     @PostMapping("/set-complete/{batchId}")
     public void setComplete(@PathVariable("batchId") Integer id) {
         batchService.setComplete(id);
@@ -56,7 +58,7 @@ public class BatchController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // delete everything from repositories orders, batches, batch_details
+    // delete EVERYTHING from repositories orders, batches, batch_details
     @DeleteMapping("/delete_all")
     public void deleteAll() {
         batchService.deleteAll();

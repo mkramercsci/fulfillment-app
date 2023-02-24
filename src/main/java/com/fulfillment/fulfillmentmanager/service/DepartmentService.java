@@ -35,5 +35,4 @@ public class DepartmentService {
         return departmentRepository.findById(id)
                 .orElseThrow(() -> new GenericNotFoundException("Dept by id " + id + " was not found"));
     }
-
 }

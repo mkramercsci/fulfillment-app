@@ -16,14 +16,6 @@ public class BatchDetailsService {
         this.batchDetailsRepository = batchDetailsRepository;
     }
 
-    public List<BatchDetails> findAll() {
-        return batchDetailsRepository.findAll();
-    }
-
-    public List<BatchDetails> findByBatchId(Integer batchId) {
-        return batchDetailsRepository.findByBatchId(batchId);
-    }
-
     // insert a new record with valid data into the database
     public BatchDetails add(BatchDetailsId batchDetailsId,
                             Batch batch, Order order, Item item, Integer quantity) {
@@ -44,6 +36,14 @@ public class BatchDetailsService {
 
         // add a new record to the batch details repository
         return batchDetailsRepository.save(batchDetails);
+    }
+
+    public List<BatchDetails> findAll() {
+        return batchDetailsRepository.findAll();
+    }
+
+    public List<BatchDetails> findByBatchId(Integer batchId) {
+        return batchDetailsRepository.findByBatchId(batchId);
     }
 
     public void deleteByBatchId(Integer id) {

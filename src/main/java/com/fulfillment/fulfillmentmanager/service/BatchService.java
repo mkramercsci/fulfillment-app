@@ -39,32 +39,6 @@ public class BatchService {
         this.orderRepository = orderRepository;
     }
 
-    // get all incomplete batches
-    public List<Batch> findAll() {
-        return batchRepository.findByComplete(false);
-    }
-
-    public List<Batch> findByComplete () { return batchRepository.findByComplete(true); }
-
-    public void setComplete (Integer id) {
-        batchRepository.updateComplete(id);
-    }
-
-    @Transactional
-    public void deleteBatch (Integer id) {
-        // the details should always get deleted before the batch itself
-        batchDetailsService.deleteByBatchId(id);
-        batchRepository.deleteById(id);
-    }
-
-    // delete EVERYTHING from batch_details, orders, and batches
-    @Transactional
-    public void deleteAll () {
-        batchDetailsService.deleteAll();
-        batchRepository.deleteAll();
-        orderService.deleteAll();
-    }
-
     // generate a new batch associated with 35 quantity of batch details
     public Batch addBatch (Batch batch) {
 
@@ -151,5 +125,36 @@ public class BatchService {
         // generate and return a valid quantity
         newQuantity = random.nextInt(1, rangeMax);
         return newQuantity;
+    }
+
+    // get all incomplete batches
+    public List<Batch> findAll() {
+        return batchRepository.findByComplete(false);
+    }
+
+    public List<Batch> findByComplete () { return batchRepository.findByComplete(true); }
+
+    public void setComplete (Integer id) {
+        batchRepository.updateComplete(id);
+    }
+
+    // the details should always get deleted before the batch itself
+    @Transactional
+    public void deleteBatch (Integer id) {
+        // NEEDS A CHECK for orders associated with the batch.
+        // get list of all order_ids within that batch
+        // check all other batch_details for matching order_id
+        // if that order_id is found, skip. otherwise, delete
+
+        batchDetailsService.deleteByBatchId(id);
+        batchRepository.deleteById(id);
+    }
+
+    // delete EVERYTHING from batch_details, orders, and batches
+    @Transactional
+    public void deleteAll () {
+        batchDetailsService.deleteAll();
+        batchRepository.deleteAll();
+        orderService.deleteAll();
     }
 }

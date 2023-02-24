@@ -29,6 +29,8 @@ public class DepartmentController {
     // 5 - furniture
     // 6 - electronics
     // 7 - salesfloor
+
+
     @GetMapping("/all")
     public ResponseEntity<List<Department>> getAllDepartments () {
         List<Department> departments = deptService.findAll();

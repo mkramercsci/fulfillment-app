@@ -15,14 +15,6 @@ public class OrderController {
 
     public OrderController (OrderService orderService) { this.orderService = orderService;}
 
-    // get a list of all orders in the system
-    @GetMapping("/all")
-    public ResponseEntity<List<Order>> findAll () {
-
-        List<Order> orders = orderService.findAll();
-        return new ResponseEntity<>(orders, HttpStatus.OK);
-    }
-
     // add a new order into the system
     @PostMapping("/add")
     public ResponseEntity<Order> addOrder() {
@@ -31,4 +23,11 @@ public class OrderController {
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 
+    // get a list of all orders in the system
+    @GetMapping("/all")
+    public ResponseEntity<List<Order>> findAll () {
+
+        List<Order> orders = orderService.findAll();
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
 }

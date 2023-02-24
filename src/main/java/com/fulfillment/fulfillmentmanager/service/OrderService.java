@@ -22,10 +22,6 @@ public class OrderService {
         this.nameRepository = nameRepository;
     }
 
-    public List<Order> findAll() {
-        return orderRepository.findAll();
-    }
-
     // add a new order with randomly generated name and id
     public Order addOrder () {
 
@@ -40,6 +36,10 @@ public class OrderService {
         order.setName(randomName);
 
         return orderRepository.save(order);
+    }
+
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 
     public void deleteAll() {
