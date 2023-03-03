@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class BatchDetails {
 
     @EmbeddedId
+    @JsonIgnore
     public BatchDetailsId id;
 
     @MapsId("batchId")

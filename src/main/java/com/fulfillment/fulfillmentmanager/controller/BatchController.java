@@ -46,7 +46,7 @@ public class BatchController {
     }
 
     // mark a whole batch as complete
-    @PostMapping("/set-complete/{batchId}")
+    @PostMapping("/set_complete/{batchId}")
     public void setComplete(@PathVariable("batchId") Integer id) {
         batchService.setComplete(id);
     }

@@ -43,7 +43,11 @@ public class BatchDetailsService {
     }
 
     public List<BatchDetails> findByBatchId(Integer batchId) {
-        return batchDetailsRepository.findByBatchId(batchId);
+
+        // return a batch's details ordered by their department
+        // an employee would want to pick all grocery items, then all clothes, etc. to reduce walking distance
+        return batchDetailsRepository.findAllByBatchIdOrderByDepartmentAsc(batchId);
+
     }
 
     public void deleteByBatchId(Integer id) {
