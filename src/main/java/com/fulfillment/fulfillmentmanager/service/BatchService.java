@@ -24,6 +24,7 @@ public class BatchService {
     private final BatchDetailsService batchDetailsService;
 
     Random random = new Random();
+
     private final OrderRepository orderRepository;
 
     @Autowired
@@ -108,7 +109,7 @@ public class BatchService {
     private Integer getNewQuantity (Integer rangeMax) {
 
         Integer newQuantity;
-        Integer restrictedMax = 4;
+        Integer restrictedMax = 5;
 
         // we are on the final item, no calculation necessary
         if (rangeMax == 1) {

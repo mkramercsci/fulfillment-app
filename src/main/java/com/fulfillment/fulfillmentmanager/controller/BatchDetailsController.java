@@ -32,4 +32,17 @@ public class BatchDetailsController {
 
         return new ResponseEntity<>(batchDetails, HttpStatus.OK);
     }
+
+    // send the parameters to the service layer to set the right details complete
+    @PostMapping("/set_complete/{batchId}/{orderId}/{deptId}/{itemId}")
+    public void setDetailsComplete (
+            @PathVariable("batchId") Integer batchId,
+            @PathVariable("orderId") Integer orderId,
+            @PathVariable("deptId") Integer deptId,
+            @PathVariable("itemId") Integer itemId) {
+
+        batchDetailsService.setDetailsComplete(batchId, orderId, deptId, itemId);
+
+    }
+
 }

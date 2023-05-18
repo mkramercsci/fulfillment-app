@@ -10,7 +10,7 @@ import java.io.Serializable;
 // code referenced from here
 // https://attacomsian.com/blog/spring-data-jpa-composite-primary-key
 
-// provides the compound key batch + order + item to the class BatchDetails
+// provides the compound key batch + order + dept + item to the class BatchDetails
 
 @Embeddable
 public class BatchDetailsId implements Serializable {

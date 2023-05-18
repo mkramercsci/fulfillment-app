@@ -8,11 +8,10 @@ import java.util.List;
 
 public interface BatchDetailsRepository extends JpaRepository<BatchDetails, BatchDetailsId> {
 
-    List<BatchDetails> findByBatchId(Integer batchId);
-
     void deleteByBatchId(Integer id);
 
     void deleteAll();
 
     List<BatchDetails> findAllByBatchIdOrderByDepartmentAsc(Integer batchId);
+
 }

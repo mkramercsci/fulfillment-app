@@ -2,6 +2,7 @@ package com.fulfillment.fulfillmentmanager.service;
 
 import com.fulfillment.fulfillmentmanager.model.*;
 import com.fulfillment.fulfillmentmanager.repo.BatchDetailsRepository;
+import com.fulfillment.fulfillmentmanager.repo.BatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +11,12 @@ import java.util.List;
 @Service
 public class BatchDetailsService {
     private final BatchDetailsRepository batchDetailsRepository;
+    private final BatchRepository batchRepository;
 
     @Autowired
-    public BatchDetailsService(BatchDetailsRepository batchDetailsRepository) {
+    public BatchDetailsService(BatchDetailsRepository batchDetailsRepository, BatchRepository batchRepository) {
         this.batchDetailsRepository = batchDetailsRepository;
+        this.batchRepository = batchRepository;
     }
 
     // insert a new record with valid data into the database
@@ -47,6 +50,12 @@ public class BatchDetailsService {
         // return a batch's details ordered by their department
         // an employee would want to pick all grocery items, then all clothes, etc. to reduce walking distance
         return batchDetailsRepository.findAllByBatchIdOrderByDepartmentAsc(batchId);
+
+    }
+
+    // IN PROGRESS - NOT WORKING
+    public void setDetailsComplete(Integer batchId, Integer orderId, Integer deptId, Integer itemId) {
+
 
     }
 
